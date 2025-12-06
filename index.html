@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>AI Smart Calculator — GST, EMI, SIP, Loan, Age</title>
+  <meta name="description" content="Free AI Smart Calculator with GST, EMI, SIP, Loan, Age and Text-based AI Calculator. Fast, responsive & AdSense ready." />
+  <meta name="keywords" content="AI calculator, GST calculator, EMI calculator, SIP calculator, loan calculator, age calculator" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- ✅ Google AdSense (Replace with your real AdSense ID later) -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+  <style>
+    :root{ --bg:#f4f7fb; --card:#ffffff; --accent:#4f46e5; --muted:#6b7280; }
+    [data-theme="dark"]{ --bg:#0b1220; --card:#071022; --accent:#60a5fa; --muted:#9ca3af; }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Segoe UI,Arial;background:var(--bg);min-height:100vh;display:flex;justify-content:center;padding:20px;color:var(--muted)}
+    .app{width:100%;max-width:440px}
+    .card{background:var(--card);border-radius:18px;padding:18px;box-shadow:0 8px 24px rgba(0,0,0,0.08)}
+    h1{text-align:center;color:var(--accent)}
+
+    input,select,button{width:100%;padding:10px;border-radius:8px;border:1px solid #ddd;margin-top:8px}
+    button{background:var(--accent);color:#fff;font-weight:600;cursor:pointer}
+    .tool{display:none;margin-top:10px}
+    .result{margin-top:8px;font-weight:600;color:var(--accent);text-align:center}
+
+    .tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:10px}
+    .tabs button{font-size:12px;padding:8px;background:#eef2ff;color:#000}
+
+    footer{text-align:center;font-size:12px;margin-top:10px}
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="card">
+      <h1>AI Smart Calculator</h1>
+
+      <!-- ✅ ADS PLACE -->
+      <div style="margin-bottom:10px">[Your Google Ad Here]</div>
+
+      <div class="tabs">
+        <button onclick="showTool('ai')">AI Text</button>
+        <button onclick="showTool('gst')">GST</button>
+        <button onclick="showTool('emi')">EMI</button>
+        <button onclick="showTool('sip')">SIP</button>
+        <button onclick="showTool('loan')">Loan</button>
+        <button onclick="showTool('age')">Age</button>
+      </div>
+
+      <!-- ✅ AI TEXT CALCULATOR -->
+      <div id="ai" class="tool">
+        <input type="text" id="aiInput" placeholder="Example: What is 15% of 500 + 20" />
+        <button onclick="calculateAI()">Calculate</button>
+        <div id="aiResult" class="result"></div>
+      </div>
+
+      <!-- ✅ GST CALCULATOR -->
+      <div id="gst" class="tool">
+        <input type="number" id="gstAmount" placeholder="Enter Amount" />
+        <input type="number" id="gstRate" placeholder="GST %" />
+        <button onclick="gstCalc()">Calculate</button>
+        <div id="gstResult" class="result"></div>
+      </div>
+
+      <!-- ✅ EMI CALCULATOR -->
+      <div id="emi" class="tool">
+        <input type="number" id="emiP" placeholder="Loan Amount" />
+        <input type="number" id="emiR" placeholder="Interest %" />
+        <input type="number" id="emiT" placeholder="Months" />
+        <button onclick="emiCalc()">Calculate</button>
+        <div id="emiResult" class="result"></div>
+      </div>
+
+      <!-- ✅ SIP CALCULATOR -->
+      <div id="sip" class="tool">
+        <input type="number" id="sipAmt" placeholder="Monthly Investment" />
+        <input type="number" id="sipRate" placeholder="Rate %" />
+        <input type="number" id="sipTime" placeholder="Years" />
+        <button onclick="sipCalc()">Calculate</button>
+        <div id="sipResult" class="result"></div>
+      </div>
+
+      <!-- ✅ LOAN CALCULATOR -->
+      <div id="loan" class="tool">
+        <input type="number" id="loanAmt" placeholder="Loan Amount" />
+        <input type="number" id="loanRate" placeholder="Interest %" />
+        <input type="number" id="loanTime" placeholder="Years" />
+        <button onclick="loanCalc()">Calculate</button>
+        <div id="loanResult" class="result"></div>
+      </div>
+
+      <!-- ✅ AGE CALCULATOR -->
+      <div id="age" class="tool">
+        <input type="date" id="dob" />
+        <button onclick="ageCalc()">Calculate Age</button>
+        <div id="ageResult" class="result"></div>
+      </div>
+
+      <footer>© 2025 AI Smart Calculator | AdSense Ready</footer>
+    </div>
+  </div>
+
+<script>
+  function showTool(id){ document.querySelectorAll('.tool').forEach(t=>t.style.display='none'); document.getElementById(id).style.display='block'; }
+  showTool('ai');
+
+  function calculateAI(){
+    let q = document.getElementById('aiInput').value;
+    q = q.replace('%','/100'); try{ document.getElementById('aiResult').innerText = eval(q); }catch{ document.getElementById('aiResult').innerText = 'Invalid Input'; }
+  }
+
+  function gstCalc(){ let a=+gstAmount.value, r=+gstRate.value; let gst=a*r/100; gstResult.innerText='Total: ₹'+(a+gst); }
+
+  function emiCalc(){ let P=+emiP.value, R=+emiR.value/12/100, T=+emiT.value; let emi=(P*R*Math.pow(1+R,T))/(Math.pow(1+R,T)-1); emiResult.innerText='EMI: ₹'+emi.toFixed(2); }
+
+  function sipCalc(){ let P=+sipAmt.value, R=+sipRate.value/100/12, T=+sipTime.value*12; let fv=P*((Math.pow(1+R,T)-1)/R)*(1+R); sipResult.innerText='Value: ₹'+fv.toFixed(0); }
+
+  function loanCalc(){ let a=+loanAmt.value, r=+loanRate.value/100, t=+loanTime.value; let i=a*r*t; loanResult.innerText='Interest: ₹'+i; }
+
+  function ageCalc(){ let d=new Date(dob.value); let diff=Date.now()-d.getTime(); let age=new Date(diff).getUTCFullYear()-1970; ageResult.innerText='Age: '+age+' Years'; }
+</script>
+</body>
+</html>
